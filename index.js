@@ -120,9 +120,21 @@ function bfsOrder(node) {
 }
 
 /*
+ * Escape HTML tags from text nodes
+ * There shouldn't be any HTML left in those nodes
+ */
+function escapeHTMLTags(str) {
+  // Detect HTML and XML tags (i.e. namespaced) with attributes
+  var complexTags = /<([a-zA-Z]*(?:\:[a-zA-Z]*)?(?:\s[a-zA-Z]*(?:\:[a-zA-Z]*)?\=\".*?\")*\s?\/?)>/g;
+
+  return str.replace(complexTags, function(tag, content) {
+    return '&lt;'+content+'&gt;';
+  });
+}
+
+/*
  * Contructs a Markdown string of replacement text for a given node
  */
-
 function getContent(node) {
   var text = '';
   for (var i = 0; i < node.childNodes.length; i++) {
@@ -130,7 +142,7 @@ function getContent(node) {
       text += node.childNodes[i]._replacement;
     }
     else if (node.childNodes[i].nodeType === 3) {
-      text += node.childNodes[i].data;
+      text += escapeHTMLTags(node.childNodes[i].data);
     }
     else { continue; }
   }
