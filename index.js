@@ -227,6 +227,13 @@ function process(node) {
   //   return;
   // }
 
+  // Create an <a> tag with node id to keep local links references
+  var nodeId = node.getAttribute('id');
+  if (!!nodeId) {
+    content = '<a id="'+nodeId+'"></a>'+content;
+    node.removeAttribute('id');
+  }
+
   for (var i = 0; i < converters.length; i++) {
     var converter = converters[i];
 
