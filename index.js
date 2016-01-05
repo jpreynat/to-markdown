@@ -125,7 +125,7 @@ function bfsOrder(node) {
  */
 function escapeHTMLTags(str) {
   // Detect HTML and XML tags (i.e. namespaced) with attributes
-  var complexTags = /<([a-zA-Z]*(?:\:[a-zA-Z]*)?(?:\s[a-zA-Z]*(?:\:[a-zA-Z]*)?\=\".*?\")*\s?\/?)>/g;
+  var complexTags = /<(\/?[a-zA-Z]*(?:\:[a-zA-Z]*)?(?:\s[a-zA-Z]*(?:\:[a-zA-Z]*)?\=\".*?\")*\s?\/?)>/g;
 
   return str.replace(complexTags, function(tag, content) {
     return '&lt;'+content+'&gt;';
