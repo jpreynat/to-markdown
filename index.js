@@ -221,13 +221,6 @@ function flankingWhitespace(node) {
 function process(node) {
   var replacement, content = getContent(node);
 
-  // Create an <a> tag with the node's id to keep local links references
-  var nodeId = node.getAttribute('id');
-  if (!!nodeId) {
-    content = '<a id="'+nodeId+'"></a>'+content;
-    node.removeAttribute('id');
-  }
-
   for (var i = 0; i < converters.length; i++) {
     var converter = converters[i];
 
